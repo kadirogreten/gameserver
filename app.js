@@ -24,7 +24,7 @@ var io = socketIo(server);
 
 dotenv.config();
 
-mongoose.connect(process.env.DB_CONNECT, {
+mongoose.connect('mongodb+srv://kadirogreten:89892dbc@gamecluster.l7pqg.mongodb.net/<dbname>?retryWrites=true&w=majority', {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }, () =>
