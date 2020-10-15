@@ -84,7 +84,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({
         _id: user._id,
         email: user.email
-    }, process.env.TOKEN_SECRET);
+    }, 'Ortamlardanaşağıalperinsikidaşşağı');
     res.header('Authorization', token).send({
         token: token
     });
