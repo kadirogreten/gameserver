@@ -124,7 +124,7 @@ io.on('connection', (socket) => {
 });
 
 
-app.set('port', process.env.PORT || 3031);
+app.set('port', process.env.PORT || 3000);
 
 
 server.listen(app.get('port'), () => console.log('server started on port ' + 'http://localhost:'+process.env.PORT));
