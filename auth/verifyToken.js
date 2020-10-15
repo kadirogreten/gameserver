@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
     });
 
     try {
-        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        const verified = jwt.verify(token, 'Ortamlardanaşağıalperinsikidaşşağı');
         req.user = verified;
         next();
     } catch (err) {
