@@ -6,6 +6,8 @@ module.exports = class Bullet extends ServerObject {
         super();
         this.direction = new Vector3();
         this.speed = 0.5;
+        this.isDestroyed = false;
+        this.activator = '';
     }
 
 
@@ -14,7 +16,7 @@ module.exports = class Bullet extends ServerObject {
         this.position.y += this.direction.y * this.speed;
         this.position.z += this.direction.z * this.speed;
 
-        return false;
+        return this.isDestroyed;
     }
 }
 
