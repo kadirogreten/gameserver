@@ -22,7 +22,7 @@ module.exports = class CurrentUser {
       this.isDead = false;
       this.respawnTicker = new Number(0);
       this.respawnTime = new Number(0);
-      this.position = new Vector3(-8, 3);
+      this.position = new Vector3(-8, 3, 0);
 
       return true;
     }

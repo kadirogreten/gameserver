@@ -1,5 +1,5 @@
 module.exports = class Vector3 {
-    constructor(x = 0, y = 0, z=0) {
+    constructor(x = 0, y = 0, z = 0) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -13,7 +13,7 @@ module.exports = class Vector3 {
 
     Normalized() {
         var magnitude = this.Magnitude();
-        return new Vector2(this.x / magnitude, this.y / magnitude, this.z / magnitude);
+        return new Vector3(this.x / magnitude, this.y / magnitude, this.z / magnitude);
     }
 
 
@@ -27,6 +27,6 @@ module.exports = class Vector3 {
 
 
     ConsoleOutput() {
-        return '(' + this.x + ',' + this.y +  ',' + this.z + ')'
+        return '(' + this.x + ',' + this.y + ',' + this.z + ')'
     }
 }
