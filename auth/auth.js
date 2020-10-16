@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
     /////// lets validate before save user /////////
     const err = registerValidation(req.body);
     if (err) {
-        res.status(400).send(err.details);
+        return res.status(400).send(err.details);
     }
 
     //////// checking existing user ////////
@@ -47,11 +47,11 @@ router.post('/register', async (req, res) => {
 
     try {
         const savedUser = await user.save();
-        res.send({
+        return res.send({
             user: user._id
         });
     } catch (error) {
-        res.status(400).send(error);
+        return res.status(400).send(error);
     }
 });
 
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
     /////// lets validate before save user /////////
     const err = loginValidation(req.body);
     if (err) {
-        res.status(400).send(err.details);
+        return res.status(400).send(err.details);
     }
 
     //////// checking existing user ////////
@@ -77,7 +77,7 @@ router.post('/login', async (req, res) => {
 
     const validPass = await bcrypt.compare(req.body.password, user.password);
 
-    if (!validPass) res.status(400).send({
+    if (!validPass) return res.status(400).send({
         message: 'Email or password is wrong!'
     });
 
