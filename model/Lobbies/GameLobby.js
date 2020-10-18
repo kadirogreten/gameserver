@@ -150,6 +150,8 @@ module.exports = class GameLobby extends LobbyBase {
         connection.socket.emit('serverSpawn', returnData);
         connection.socket.broadcast.to(lobby.id).emit('serverSpawn', returnData);
 
+        console.log('kurşun atıyor', {'kurşun':returnData});
+
     }
 
 
