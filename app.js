@@ -11,6 +11,7 @@ let Server = require('./server/Server');
 //////////// import Routes //////////////////
 const authRoute = require('./auth/auth');
 const playerRoute = require('./game/player');
+const { date } = require('@hapi/joi');
 //////////// End of import Routes //////////////////
 
 
@@ -28,7 +29,9 @@ mongoose.connect('mongodb+srv://kadirogreten:89892dbc@gamecluster.l7pqg.mongodb.
         useNewUrlParser: true,
         useUnifiedTopology: true
     }, () =>
-    console.log('connected to db!')
+    console.log('connected to db! ' + new Date().toLocaleString('tr-TR', {
+        timeZone: 'Europe/Istanbul'
+      }))
 );
 
 
