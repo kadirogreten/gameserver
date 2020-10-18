@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
+
 ////// VALIDATION ///////
 const {
     registerValidation,
@@ -22,7 +23,10 @@ router.post('/register', async (req, res) => {
     /////// lets validate before save user /////////
     const err = registerValidation(req.body);
     if (err) {
-        return res.status(400).send(err.details);
+        return res.status(400).send({
+            message: err.details,
+            isError: true
+        });
     }
 
     //////// checking existing user ////////
@@ -33,7 +37,8 @@ router.post('/register', async (req, res) => {
 
 
     if (existingUser) return res.status(400).send({
-        message: 'Email already exists!'
+        message: 'Email already exists!',
+        isError: true
     });
 
     const salt = await bcrypt.genSalt(10);
@@ -48,20 +53,27 @@ router.post('/register', async (req, res) => {
     try {
         const savedUser = await user.save();
         return res.send({
-            user: user._id
+            message: 'Kayıt başarılı!',
+            isError: false
         });
     } catch (error) {
-        return res.status(400).send(error);
+        return res.status(400).send({
+            message: error,
+            isError: true
+        });
     }
 });
 
 
 router.post('/login', async (req, res) => {
-    
+
     /////// lets validate before save user /////////
     const err = loginValidation(req.body);
     if (err) {
-        return res.status(400).send(err.details);
+        return res.status(400).send({
+            message: err.details,
+            isError: true
+        });
     }
 
     //////// checking existing user ////////
@@ -72,21 +84,29 @@ router.post('/login', async (req, res) => {
 
 
     if (!user) return res.status(400).send({
-        message: 'Email or password is wrong!'
+        message: 'Email or password is wrong!',
+        isError: true
     });
 
     const validPass = await bcrypt.compare(req.body.password, user.password);
 
     if (!validPass) return res.status(400).send({
-        message: 'Email or password is wrong!'
+        message: 'Email or password is wrong!',
+        isError: true
     });
+
+    
 
     const token = jwt.sign({
         _id: user._id,
         email: user.email
-    }, 'Ortamlardanaşağıalperinsikidaşşağı');
+    }, 'Ortamlardanaşağıalperinsikidaşşağı',{ expiresIn: '15d' });
     res.header('Authorization', token).send({
-        token: token
+        token: token,
+        id: user._id,
+        message: 'Giriş başarılı!',
+        isError: false
+
     });
 });
 

@@ -7,7 +7,7 @@ router.get('/get-profile',verified, async (req,res)=> {
         _id: req.user._id
     });
 
-    res.json({id:user._id,name:user.name});
+    return res.json({id:user._id,name:user.name});
 })
 
 module.exports = router;
